@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fotos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="gbar">
+    <div class="gbar-left">
+        <span class="gtitle">Fotos</span>
+    </div>
+
+    <div class="gbar-right">
+        <a class="gbar-link" href="/logout">Cerrar sesión</a>
+    </div>
+</nav>
+
+<main class="gmain">
+    <section class="toolbar">
+        <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <input class="file-input" type="file" name="file" required>
+            <button type="submit" class="btn">Subir</button>
+        </form>
+    </section>
+
+    <section class="gallery">
+        {% for file in files %}
+            <div class="photo-card" title="{{ file.filename }}">
+                {% if 'video' in file.type %}
+                    <video class="photo-media" controls src="{{ url_for('uploaded_file', filename=file.filename) }}"></video>
+                {% else %}
+                    <img class="photo-media" src="{{ url_for('uploaded_file', filename=file.filename) }}" alt="{{ file.filename }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+</main>
+
+</body>
+</html>

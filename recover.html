@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar cuenta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div style="max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h2>Recuperar cuenta</h2>
+
+        {% if error %}
+            <p style="color:#c00; text-align:center;">{{ error }}</p>
+        {% endif %}
+
+        {% if message %}
+            <p style="text-align:center;">
+                {{ message }}
+            </p>
+        {% endif %}
+
+        <form method="POST">
+            <input
+                type="email"
+                name="email"
+                placeholder="Correo electrónico"
+                value="{{ email or '' }}"
+                required
+                style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;"
+            />
+            <button type="submit" class="btn" style="width: 100%;">Enviar enlace</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="/login">Volver al inicio de sesión</a>
+        </p>
+    </div>
+</body>
+</html>
